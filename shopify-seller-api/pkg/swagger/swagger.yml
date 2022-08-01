@@ -1,0 +1,65 @@
+consumes:
+- application/json
+info:
+  description: HTTP server in Go with Swagger endpoints definition.
+  title: shopify-seller-api
+  version: 0.1.0
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
+
+paths:
+  /health:
+    get:
+      operationId: checkHealth
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: OK message.
+          schema:
+            type: string
+            enum:
+            - OK
+
+  /swatch/{make}:
+    get:
+      description: Return json file for a specific make that will help produces color swatches.
+      produces:
+      - application/json
+      parameters:
+        - name: make
+          in: path
+          type: string
+          required: true
+          description: name of the make we want on all color variants.
+      responses:
+        200:
+          description: Returns the the make.
+          schema:
+            type: array
+            items: {}
+        400:
+          description: Invalid "make" provided or not available.
+
+  /product/{make}:
+    get:
+      description: Return json file for a specific make that will help produces products for seller central.
+      produces:
+      - application/json
+      parameters:
+        - name: make
+          in: path
+          type: string
+          required: true
+          description: name of the make we want on all product variants.
+      responses:
+        200:
+          description: Returns the the make.
+          schema:
+            type: array
+            items: {}
+        400:
+          description: Invalid "make" provided or not available.
