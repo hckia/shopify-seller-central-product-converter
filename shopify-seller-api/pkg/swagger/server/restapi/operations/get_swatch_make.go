@@ -31,7 +31,7 @@ func NewGetSwatchMake(ctx *middleware.Context, handler GetSwatchMakeHandler) *Ge
 
 /* GetSwatchMake swagger:route GET /swatch/{make} getSwatchMake
 
-Return json file for a specific make that will help produces color swatches.
+Return an array of objects for a specific make that will help produce color swatches for Amazon seller central.
 
 */
 type GetSwatchMake struct {

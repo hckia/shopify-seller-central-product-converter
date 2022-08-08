@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
+	"strings"
 
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/hckia/shopify-seller-central-product-converter/shopify-seller-api/pkg/swagger/server/models"
 	"github.com/hckia/shopify-seller-central-product-converter/shopify-seller-api/pkg/swagger/server/restapi"
+
 	"github.com/hckia/shopify-seller-central-product-converter/shopify-seller-api/pkg/swagger/server/restapi/operations"
 )
 
@@ -62,26 +64,68 @@ func Health(operations.CheckHealthParams) middleware.Responder {
 	return operations.NewCheckHealthOK().WithPayload("OK")
 }
 
+type productPayload struct {
+	handle      string
+	optionName  string
+	optionValue string
+	price       float32
+	year        int
+}
+
 func GetProductMake(make operations.GetProductMakeParams) middleware.Responder {
-	var URL string = ("https://someip.com/products?make=" + make.Make)
-
-	response, err := http.Get(URL)
-
-	if err != nil {
+	var URL string = ("https://someip.com/products/" + make.Make)
+	fmt.Println(URL)  // https://someip.com/products/honda
+	fmt.Println(make) // {0x14000598200 honda}
+	//response, err := http.Get(URL)
+	var err string = "some value"
+	if err == "nil" {
 		fmt.Println("The make provided does not exist, or some other error has occurred.")
+	} else if strings.ToLower(make.Make) == "honda" {
+		fmt.Println("Honda found.")
 	}
 
-	return operations.NewGetProductMakeOK().WithPayload(response.Body)
+	productPayloads := models.MakeProducts{}
+
+	product := models.ProductRow{}
+	product.Handle = "Goat"
+	product.OptionName = "blah"
+	product.OptionValue = "blah"
+	product.Price = 39.21
+	product.Year = 2000
+
+	productPayloads = append(productPayloads, &product)
+
+	return operations.NewGetProductMakeOK().WithPayload(productPayloads)
 }
 
 func GetSwatchMake(make operations.GetSwatchMakeParams) middleware.Responder {
-	var URL string = ("https://someip.com/swatches?make=" + make.Make)
-
-	response, err := http.Get(URL)
-
-	if err != nil {
+	var URL string = ("https://someip.com/swatch/" + make.Make)
+	fmt.Println(URL)  // https://someip.com/swatch/honda
+	fmt.Println(make) // {0x14000598200 honda}
+	//response, err := http.Get(URL)
+	var err string = "some value"
+	if err == "nil" {
 		fmt.Println("The make provided does not exist, or some other error has occurred.")
+	} else if strings.ToLower(make.Make) == "Honda" {
+		fmt.Println("Honda found.")
 	}
 
-	return operations.NewGetSwatchMakeOK().WithPayload(response.Body)
+	swatchPayload := models.MakeSwatches{}
+
+	swatch := models.SwatchRow{
+		ColorCode: "",
+		ColorName: "",
+		Handle:    "",
+		HexCode:   "",
+		Make:      "",
+		Mmy:       "",
+		Model:     "",
+		Tricoat:   false,
+		Year:      0,
+	}
+
+	swatchPayload = append(swatchPayload, &swatch)
+
+	return operations.NewGetSwatchMakeOK().WithPayload(swatchPayload)
+
 }

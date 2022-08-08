@@ -9,12 +9,14 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+
+	"github.com/hckia/shopify-seller-central-product-converter/shopify-seller-api/pkg/swagger/server/models"
 )
 
 // GetSwatchMakeOKCode is the HTTP code returned for type GetSwatchMakeOK
 const GetSwatchMakeOKCode int = 200
 
-/*GetSwatchMakeOK Returns the the make.
+/*GetSwatchMakeOK A JSON object containing the data necessary to make all color swatches.
 
 swagger:response getSwatchMakeOK
 */
@@ -23,7 +25,7 @@ type GetSwatchMakeOK struct {
 	/*
 	  In: Body
 	*/
-	Payload []interface{} `json:"body,omitempty"`
+	Payload models.MakeSwatches `json:"body,omitempty"`
 }
 
 // NewGetSwatchMakeOK creates GetSwatchMakeOK with default headers values
@@ -33,13 +35,13 @@ func NewGetSwatchMakeOK() *GetSwatchMakeOK {
 }
 
 // WithPayload adds the payload to the get swatch make o k response
-func (o *GetSwatchMakeOK) WithPayload(payload []interface{}) *GetSwatchMakeOK {
+func (o *GetSwatchMakeOK) WithPayload(payload models.MakeSwatches) *GetSwatchMakeOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the get swatch make o k response
-func (o *GetSwatchMakeOK) SetPayload(payload []interface{}) {
+func (o *GetSwatchMakeOK) SetPayload(payload models.MakeSwatches) {
 	o.Payload = payload
 }
 
@@ -50,7 +52,7 @@ func (o *GetSwatchMakeOK) WriteResponse(rw http.ResponseWriter, producer runtime
 	payload := o.Payload
 	if payload == nil {
 		// return empty array
-		payload = make([]interface{}, 0, 50)
+		payload = models.MakeSwatches{}
 	}
 
 	if err := producer.Produce(rw, payload); err != nil {

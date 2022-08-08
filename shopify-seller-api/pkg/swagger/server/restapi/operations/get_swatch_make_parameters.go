@@ -30,7 +30,7 @@ type GetSwatchMakeParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
-	/*name of the make we want on all color variants.
+	/*Car make name
 	  Required: true
 	  In: path
 	*/

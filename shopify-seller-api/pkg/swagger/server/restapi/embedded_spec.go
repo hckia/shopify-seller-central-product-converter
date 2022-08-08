@@ -55,7 +55,7 @@ func init() {
     },
     "/product/{make}": {
       "get": {
-        "description": "Return json file for a specific make that will help produces products for seller central.",
+        "description": "Return an array of objects for a specific make that will help produce color swatches for Amazon seller central.",
         "produces": [
           "application/json"
         ],
@@ -70,10 +70,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Returns the the make.",
+            "description": "A JSON object containing the data necessary to make seller central Product files.",
             "schema": {
-              "type": "array",
-              "items": {}
+              "$ref": "#/definitions/makeProducts"
             }
           },
           "400": {
@@ -84,14 +83,11 @@ func init() {
     },
     "/swatch/{make}": {
       "get": {
-        "description": "Return json file for a specific make that will help produces color swatches.",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Return an array of objects for a specific make that will help produce color swatches for Amazon seller central.",
         "parameters": [
           {
             "type": "string",
-            "description": "name of the make we want on all color variants.",
+            "description": "Car make name",
             "name": "make",
             "in": "path",
             "required": true
@@ -99,15 +95,104 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Returns the the make.",
+            "description": "A JSON object containing the data necessary to make all color swatches.",
             "schema": {
-              "type": "array",
-              "items": {}
+              "$ref": "#/definitions/makeSwatches"
             }
           },
           "400": {
             "description": "Invalid \"make\" provided or not available."
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "makeProducts": {
+      "type": "array",
+      "title": "Make Products",
+      "items": {
+        "title": "Product Row",
+        "$ref": "#/definitions/productRow"
+      }
+    },
+    "makeSwatches": {
+      "type": "array",
+      "title": "Make Swatches",
+      "items": {
+        "title": "Swatch Row",
+        "$ref": "#/definitions/swatchRow"
+      }
+    },
+    "productRow": {
+      "type": "object",
+      "title": "Single Row of data to produce a colors Amazon Seller Central Product",
+      "properties": {
+        "handle": {
+          "type": "string",
+          "title": "the handle for the product variation example is make-model-year-touch-up-kit"
+        },
+        "optionName": {
+          "type": "string",
+          "title": "name of the Option1 Name field"
+        },
+        "optionValue": {
+          "type": "string",
+          "title": "value of the Option1 Name field, labeled Option1 Value"
+        },
+        "price": {
+          "type": "number",
+          "title": "price of the product."
+        },
+        "year": {
+          "type": "integer",
+          "title": "year of the product",
+          "maximum": 2023,
+          "minimum": 2000
+        }
+      }
+    },
+    "swatchRow": {
+      "type": "object",
+      "title": "Single Row of data to produce a color swatch for a specific Make Model Year, and Color",
+      "properties": {
+        "colorCode": {
+          "type": "string",
+          "title": "color code on row"
+        },
+        "colorName": {
+          "type": "string",
+          "title": "color name on row"
+        },
+        "handle": {
+          "type": "string",
+          "title": "the handle for the product variation example is make-model-year-touch-up-kit"
+        },
+        "hexCode": {
+          "type": "string",
+          "title": "hex code value on row. Field name is Variant Metafield variants.color [color]"
+        },
+        "make": {
+          "type": "string",
+          "title": "Vehicle make on row"
+        },
+        "mmy": {
+          "type": "string",
+          "title": "make, model, year on row"
+        },
+        "model": {
+          "type": "string",
+          "title": "Vehicle model on row"
+        },
+        "tricoat": {
+          "type": "boolean",
+          "title": "check if it is tricoat or not"
+        },
+        "year": {
+          "type": "integer",
+          "title": "Vehcile year on row",
+          "maximum": 2023,
+          "minimum": 2000
         }
       }
     }
@@ -151,7 +236,7 @@ func init() {
     },
     "/product/{make}": {
       "get": {
-        "description": "Return json file for a specific make that will help produces products for seller central.",
+        "description": "Return an array of objects for a specific make that will help produce color swatches for Amazon seller central.",
         "produces": [
           "application/json"
         ],
@@ -166,10 +251,9 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Returns the the make.",
+            "description": "A JSON object containing the data necessary to make seller central Product files.",
             "schema": {
-              "type": "array",
-              "items": {}
+              "$ref": "#/definitions/makeProducts"
             }
           },
           "400": {
@@ -180,14 +264,11 @@ func init() {
     },
     "/swatch/{make}": {
       "get": {
-        "description": "Return json file for a specific make that will help produces color swatches.",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Return an array of objects for a specific make that will help produce color swatches for Amazon seller central.",
         "parameters": [
           {
             "type": "string",
-            "description": "name of the make we want on all color variants.",
+            "description": "Car make name",
             "name": "make",
             "in": "path",
             "required": true
@@ -195,15 +276,104 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Returns the the make.",
+            "description": "A JSON object containing the data necessary to make all color swatches.",
             "schema": {
-              "type": "array",
-              "items": {}
+              "$ref": "#/definitions/makeSwatches"
             }
           },
           "400": {
             "description": "Invalid \"make\" provided or not available."
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "makeProducts": {
+      "type": "array",
+      "title": "Make Products",
+      "items": {
+        "title": "Product Row",
+        "$ref": "#/definitions/productRow"
+      }
+    },
+    "makeSwatches": {
+      "type": "array",
+      "title": "Make Swatches",
+      "items": {
+        "title": "Swatch Row",
+        "$ref": "#/definitions/swatchRow"
+      }
+    },
+    "productRow": {
+      "type": "object",
+      "title": "Single Row of data to produce a colors Amazon Seller Central Product",
+      "properties": {
+        "handle": {
+          "type": "string",
+          "title": "the handle for the product variation example is make-model-year-touch-up-kit"
+        },
+        "optionName": {
+          "type": "string",
+          "title": "name of the Option1 Name field"
+        },
+        "optionValue": {
+          "type": "string",
+          "title": "value of the Option1 Name field, labeled Option1 Value"
+        },
+        "price": {
+          "type": "number",
+          "title": "price of the product."
+        },
+        "year": {
+          "type": "integer",
+          "title": "year of the product",
+          "maximum": 2023,
+          "minimum": 2000
+        }
+      }
+    },
+    "swatchRow": {
+      "type": "object",
+      "title": "Single Row of data to produce a color swatch for a specific Make Model Year, and Color",
+      "properties": {
+        "colorCode": {
+          "type": "string",
+          "title": "color code on row"
+        },
+        "colorName": {
+          "type": "string",
+          "title": "color name on row"
+        },
+        "handle": {
+          "type": "string",
+          "title": "the handle for the product variation example is make-model-year-touch-up-kit"
+        },
+        "hexCode": {
+          "type": "string",
+          "title": "hex code value on row. Field name is Variant Metafield variants.color [color]"
+        },
+        "make": {
+          "type": "string",
+          "title": "Vehicle make on row"
+        },
+        "mmy": {
+          "type": "string",
+          "title": "make, model, year on row"
+        },
+        "model": {
+          "type": "string",
+          "title": "Vehicle model on row"
+        },
+        "tricoat": {
+          "type": "boolean",
+          "title": "check if it is tricoat or not"
+        },
+        "year": {
+          "type": "integer",
+          "title": "Vehcile year on row",
+          "maximum": 2023,
+          "minimum": 2000
         }
       }
     }

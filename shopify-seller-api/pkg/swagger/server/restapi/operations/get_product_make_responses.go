@@ -9,12 +9,14 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
+
+	"github.com/hckia/shopify-seller-central-product-converter/shopify-seller-api/pkg/swagger/server/models"
 )
 
 // GetProductMakeOKCode is the HTTP code returned for type GetProductMakeOK
 const GetProductMakeOKCode int = 200
 
-/*GetProductMakeOK Returns the the make.
+/*GetProductMakeOK A JSON object containing the data necessary to make seller central Product files.
 
 swagger:response getProductMakeOK
 */
@@ -23,7 +25,7 @@ type GetProductMakeOK struct {
 	/*
 	  In: Body
 	*/
-	Payload []interface{} `json:"body,omitempty"`
+	Payload models.MakeProducts `json:"body,omitempty"`
 }
 
 // NewGetProductMakeOK creates GetProductMakeOK with default headers values
@@ -33,13 +35,13 @@ func NewGetProductMakeOK() *GetProductMakeOK {
 }
 
 // WithPayload adds the payload to the get product make o k response
-func (o *GetProductMakeOK) WithPayload(payload []interface{}) *GetProductMakeOK {
+func (o *GetProductMakeOK) WithPayload(payload models.MakeProducts) *GetProductMakeOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the get product make o k response
-func (o *GetProductMakeOK) SetPayload(payload []interface{}) {
+func (o *GetProductMakeOK) SetPayload(payload models.MakeProducts) {
 	o.Payload = payload
 }
 
@@ -50,7 +52,7 @@ func (o *GetProductMakeOK) WriteResponse(rw http.ResponseWriter, producer runtim
 	payload := o.Payload
 	if payload == nil {
 		// return empty array
-		payload = make([]interface{}, 0, 50)
+		payload = models.MakeProducts{}
 	}
 
 	if err := producer.Produce(rw, payload); err != nil {

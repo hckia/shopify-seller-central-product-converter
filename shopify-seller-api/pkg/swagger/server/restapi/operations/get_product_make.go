@@ -31,7 +31,7 @@ func NewGetProductMake(ctx *middleware.Context, handler GetProductMakeHandler) *
 
 /* GetProductMake swagger:route GET /product/{make} getProductMake
 
-Return json file for a specific make that will help produces products for seller central.
+Return an array of objects for a specific make that will help produce color swatches for Amazon seller central.
 
 */
 type GetProductMake struct {
