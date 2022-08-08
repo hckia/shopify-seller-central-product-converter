@@ -20,4 +20,8 @@ func main() {
 		}
 	}
 	//fmt.Println(os.Args[1:])
+	// server struct
+	// methods to start
+	// endpoint handlers would invoke
+	// main -> server -> handlers -> endpoints -> application functions
 }

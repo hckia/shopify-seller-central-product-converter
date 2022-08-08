@@ -25,7 +25,7 @@ type GetSwatchMakeOK struct {
 	/*
 	  In: Body
 	*/
-	Payload models.MakeSwatches `json:"body,omitempty"`
+	Payload []*models.SwatchRow `json:"body,omitempty"`
 }
 
 // NewGetSwatchMakeOK creates GetSwatchMakeOK with default headers values
@@ -35,13 +35,13 @@ func NewGetSwatchMakeOK() *GetSwatchMakeOK {
 }
 
 // WithPayload adds the payload to the get swatch make o k response
-func (o *GetSwatchMakeOK) WithPayload(payload models.MakeSwatches) *GetSwatchMakeOK {
+func (o *GetSwatchMakeOK) WithPayload(payload []*models.SwatchRow) *GetSwatchMakeOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the get swatch make o k response
-func (o *GetSwatchMakeOK) SetPayload(payload models.MakeSwatches) {
+func (o *GetSwatchMakeOK) SetPayload(payload []*models.SwatchRow) {
 	o.Payload = payload
 }
 
@@ -52,7 +52,7 @@ func (o *GetSwatchMakeOK) WriteResponse(rw http.ResponseWriter, producer runtime
 	payload := o.Payload
 	if payload == nil {
 		// return empty array
-		payload = models.MakeSwatches{}
+		payload = make([]*models.SwatchRow, 0, 50)
 	}
 
 	if err := producer.Produce(rw, payload); err != nil {

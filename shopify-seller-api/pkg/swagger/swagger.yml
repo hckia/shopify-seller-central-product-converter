@@ -40,7 +40,9 @@ paths:
         200:
           description: A JSON object containing the data necessary to make seller central Product files.
           schema:
-            $ref: "#/definitions/makeProducts"
+            type: array
+            items:
+              $ref: "#/definitions/productRow"
         400:
           description: Invalid "make" provided or not available.
 # both /swatch/{make} and /product/{make} produce flat files. As such their endpoints have been set up to receive 
@@ -58,17 +60,14 @@ paths:
         200:
           description: A JSON object containing the data necessary to make all color swatches.
           schema:
-            $ref: "#/definitions/makeSwatches"
+            type: array
+            items:
+              $ref: "#/definitions/swatchRow"
         400:
           description: Invalid "make" provided or not available.
 
 definitions:
-  makeProducts:
-    title: Make Products
-    type: array
-    items:
-      title: Product Row
-      $ref: "#/definitions/productRow"
+
   productRow:
     title: Single Row of data to produce a colors Amazon Seller Central Product
     type: object
@@ -90,12 +89,7 @@ definitions:
         type: integer
         minimum: 2000
         maximum: 2023
-  makeSwatches:
-    title: Make Swatches
-    type: array
-    items:
-      title: Swatch Row
-      $ref: "#/definitions/swatchRow"
+
   swatchRow:
     title: Single Row of data to produce a color swatch for a specific Make Model Year, and Color
     type: object

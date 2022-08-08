@@ -84,14 +84,21 @@ func GetProductMake(make operations.GetProductMakeParams) middleware.Responder {
 		fmt.Println("Honda found.")
 	}
 
-	productPayloads := models.MakeProducts{}
+	var productPayloads []*models.ProductRow
 
-	product := models.ProductRow{}
-	product.Handle = "Goat"
-	product.OptionName = "blah"
-	product.OptionValue = "blah"
-	product.Price = 39.21
-	product.Year = 2000
+	product := models.ProductRow{
+		Handle:      "honda-accord-2000-touch-up-kit",
+		OptionName:  "honda accord Paint Colors",
+		OptionValue: "Dark Emerald Pearl : G-87P",
+		Price:       39.21,
+		Year:        2000,
+	}
+
+	//	product.Handle = "honda-accord-2000-touch-up-kit"
+	//	product.OptionName = "honda accord Paint Colors"
+	//	product.OptionValue = "Dark Emerald Pearl : G-87P"
+	//	product.Price = 39.21
+	//	product.Year = 2000
 
 	productPayloads = append(productPayloads, &product)
 
@@ -110,18 +117,18 @@ func GetSwatchMake(make operations.GetSwatchMakeParams) middleware.Responder {
 		fmt.Println("Honda found.")
 	}
 
-	swatchPayload := models.MakeSwatches{}
+	var swatchPayload []*models.SwatchRow
 
 	swatch := models.SwatchRow{
-		ColorCode: "",
-		ColorName: "",
-		Handle:    "",
-		HexCode:   "",
-		Make:      "",
-		Mmy:       "",
-		Model:     "",
+		ColorCode: "G-87P",
+		ColorName: "Dark Emerald Pearl",
+		Handle:    "honda-accord-2000-touch-up-kit",
+		HexCode:   "#0c5c1c",
+		Make:      "Honda",
+		Mmy:       "2000 Honda Accord",
+		Model:     "Accord",
 		Tricoat:   false,
-		Year:      0,
+		Year:      2000,
 	}
 
 	swatchPayload = append(swatchPayload, &swatch)
