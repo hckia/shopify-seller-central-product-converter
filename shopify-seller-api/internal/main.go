@@ -72,6 +72,8 @@ type productPayload struct {
 	year        int
 }
 
+// comment is to initiate a PR for zeal to review accessor methods.
+
 func GetProductMake(make operations.GetProductMakeParams) middleware.Responder {
 	var URL string = ("https://someip.com/products/" + make.Make)
 	fmt.Println(URL)  // https://someip.com/products/honda
