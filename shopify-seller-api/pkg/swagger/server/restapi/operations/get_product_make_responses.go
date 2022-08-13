@@ -25,7 +25,7 @@ type GetProductMakeOK struct {
 	/*
 	  In: Body
 	*/
-	Payload models.MakeProducts `json:"body,omitempty"`
+	Payload []*models.ProductRow `json:"body,omitempty"`
 }
 
 // NewGetProductMakeOK creates GetProductMakeOK with default headers values
@@ -35,13 +35,13 @@ func NewGetProductMakeOK() *GetProductMakeOK {
 }
 
 // WithPayload adds the payload to the get product make o k response
-func (o *GetProductMakeOK) WithPayload(payload models.MakeProducts) *GetProductMakeOK {
+func (o *GetProductMakeOK) WithPayload(payload []*models.ProductRow) *GetProductMakeOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the get product make o k response
-func (o *GetProductMakeOK) SetPayload(payload models.MakeProducts) {
+func (o *GetProductMakeOK) SetPayload(payload []*models.ProductRow) {
 	o.Payload = payload
 }
 
@@ -52,7 +52,7 @@ func (o *GetProductMakeOK) WriteResponse(rw http.ResponseWriter, producer runtim
 	payload := o.Payload
 	if payload == nil {
 		// return empty array
-		payload = models.MakeProducts{}
+		payload = make([]*models.ProductRow, 0, 50)
 	}
 
 	if err := producer.Produce(rw, payload); err != nil {

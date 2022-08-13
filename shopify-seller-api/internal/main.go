@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime/middleware"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/hckia/shopify-seller-central-product-converter/shopify-seller-api/pkg/swagger/server/models"
 	"github.com/hckia/shopify-seller-central-product-converter/shopify-seller-api/pkg/swagger/server/restapi"
 
@@ -84,14 +85,21 @@ func GetProductMake(make operations.GetProductMakeParams) middleware.Responder {
 		fmt.Println("Honda found.")
 	}
 
-	productPayloads := models.MakeProducts{}
+	var productPayloads []*models.ProductRow
 
-	product := models.ProductRow{}
-	product.Handle = "Goat"
-	product.OptionName = "blah"
-	product.OptionValue = "blah"
-	product.Price = 39.21
-	product.Year = 2000
+	product := models.ProductRow{
+		Handle:      "honda-accord-2000-touch-up-kit",
+		OptionName:  "honda accord Paint Colors",
+		OptionValue: "Dark Emerald Pearl : G-87P",
+		Price:       39.21,
+		Year:        2000,
+	}
+
+	//	product.Handle = "honda-accord-2000-touch-up-kit"
+	//	product.OptionName = "honda accord Paint Colors"
+	//	product.OptionValue = "Dark Emerald Pearl : G-87P"
+	//	product.Price = 39.21
+	//	product.Year = 2000
 
 	productPayloads = append(productPayloads, &product)
 
@@ -100,31 +108,25 @@ func GetProductMake(make operations.GetProductMakeParams) middleware.Responder {
 
 func GetSwatchMake(make operations.GetSwatchMakeParams) middleware.Responder {
 	var URL string = ("https://someip.com/swatch/" + make.Make)
-	fmt.Println(URL)  // https://someip.com/swatch/honda
-	fmt.Println(make) // {0x14000598200 honda}
+	fmt.Println(URL) // https://someip.com/swatch/honda
+	//fmt.Println(make) // {0x14000598200 honda}
 	//response, err := http.Get(URL)
-	var err string = "some value"
-	if err == "nil" {
-		fmt.Println("The make provided does not exist, or some other error has occurred.")
-	} else if strings.ToLower(make.Make) == "Honda" {
-		fmt.Println("Honda found.")
-	}
 
-	swatchPayload := models.MakeSwatches{}
+	var swatchPayload = getSwatchQuery(make.Make)
 
-	swatch := models.SwatchRow{
-		ColorCode: "",
-		ColorName: "",
-		Handle:    "",
-		HexCode:   "",
-		Make:      "",
-		Mmy:       "",
-		Model:     "",
-		Tricoat:   false,
-		Year:      0,
-	}
+	// swatch := models.SwatchRow{
+	// 	ColorCode: "G-87P",
+	// 	ColorName: "Dark Emerald Pearl",
+	// 	Handle:    "honda-accord-2000-touch-up-kit",
+	// 	HexCode:   "#0c5c1c",
+	// 	Make:      "Honda",
+	// 	Mmy:       "2000 Honda Accord",
+	// 	Model:     "Accord",
+	// 	Tricoat:   false,
+	// 	Year:      2000,
+	// }
 
-	swatchPayload = append(swatchPayload, &swatch)
+	// swatchPayload = append(swatchPayload, &swatch)
 
 	return operations.NewGetSwatchMakeOK().WithPayload(swatchPayload)
 

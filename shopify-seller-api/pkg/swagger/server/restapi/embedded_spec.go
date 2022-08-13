@@ -72,7 +72,10 @@ func init() {
           "200": {
             "description": "A JSON object containing the data necessary to make seller central Product files.",
             "schema": {
-              "$ref": "#/definitions/makeProducts"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/productRow"
+              }
             }
           },
           "400": {
@@ -97,7 +100,10 @@ func init() {
           "200": {
             "description": "A JSON object containing the data necessary to make all color swatches.",
             "schema": {
-              "$ref": "#/definitions/makeSwatches"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/swatchRow"
+              }
             }
           },
           "400": {
@@ -108,22 +114,6 @@ func init() {
     }
   },
   "definitions": {
-    "makeProducts": {
-      "type": "array",
-      "title": "Make Products",
-      "items": {
-        "title": "Product Row",
-        "$ref": "#/definitions/productRow"
-      }
-    },
-    "makeSwatches": {
-      "type": "array",
-      "title": "Make Swatches",
-      "items": {
-        "title": "Swatch Row",
-        "$ref": "#/definitions/swatchRow"
-      }
-    },
     "productRow": {
       "type": "object",
       "title": "Single Row of data to produce a colors Amazon Seller Central Product",
@@ -253,7 +243,10 @@ func init() {
           "200": {
             "description": "A JSON object containing the data necessary to make seller central Product files.",
             "schema": {
-              "$ref": "#/definitions/makeProducts"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/productRow"
+              }
             }
           },
           "400": {
@@ -278,7 +271,10 @@ func init() {
           "200": {
             "description": "A JSON object containing the data necessary to make all color swatches.",
             "schema": {
-              "$ref": "#/definitions/makeSwatches"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/swatchRow"
+              }
             }
           },
           "400": {
@@ -289,22 +285,6 @@ func init() {
     }
   },
   "definitions": {
-    "makeProducts": {
-      "type": "array",
-      "title": "Make Products",
-      "items": {
-        "title": "Product Row",
-        "$ref": "#/definitions/productRow"
-      }
-    },
-    "makeSwatches": {
-      "type": "array",
-      "title": "Make Swatches",
-      "items": {
-        "title": "Swatch Row",
-        "$ref": "#/definitions/swatchRow"
-      }
-    },
     "productRow": {
       "type": "object",
       "title": "Single Row of data to produce a colors Amazon Seller Central Product",
