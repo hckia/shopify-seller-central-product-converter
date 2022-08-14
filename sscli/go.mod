@@ -18,6 +18,7 @@ require (
 	github.com/go-openapi/swag v0.21.1 // indirect
 	github.com/go-openapi/validate v0.21.0 // indirect
 	github.com/go-stack/stack v1.8.1 // indirect
+	github.com/hckia/shopify-seller-central-product-converter v0.0.0-20220814214611-fc7052a96c4b // indirect
 	github.com/hckia/shopify-seller-central-product-converter/shopify-seller-api v0.0.0-20220814182935-557fffe304a5 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
 	github.com/jessevdk/go-flags v1.5.0 // indirect
