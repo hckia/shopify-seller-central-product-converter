@@ -4,7 +4,7 @@ tasks:
     build:
         desc: Build the app
         cmds:
-        - GOFLAGS=-mod=mod go build -o bin/shopify-seller-api internal/main.go
+        - GOFLAGS=-mod=mod go build -o bin/shopify-seller-api internal/*
 
     run: 
         desc: Run the app
