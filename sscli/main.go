@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/hckia/shopify-seller-central-product-converter/sscli/cmd/sscli"
+	"github.com/hckia/shopify-seller-central-product-converter/sscli/cmd/call"
 )
 
 func main() {
-	sscli.Execute()
+	call.Execute()
 }
