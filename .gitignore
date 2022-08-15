@@ -1,3 +1,5 @@
+# ignore data
+Data/
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -13,3 +15,13 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+### files to ignore
+*.xls
+*.xlsx
+*.csv
+
+### images to ignore
+*.jpg
+*.png
+*.jpeg
