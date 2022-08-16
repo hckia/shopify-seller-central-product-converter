@@ -1,7 +1,7 @@
 package sscli
 
 import (
-	//"encoding/csv"
+	//"encoding/csv" - will be applied in future iterations as a flag.
 	"encoding/json"
 	"errors"
 	"log"
@@ -64,7 +64,7 @@ func createProductFile(makeParam string, respString []byte) bool {
 		return true
 	}
 
-	// CSV
+	// CSV - will be applied in future iterations as a flag.
 	// f, err := os.Create(makeParamStrFile)
 
 	// if err != nil {
