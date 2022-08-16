@@ -57,7 +57,24 @@ func createSwatchFile(makeParam string, respString []byte) bool {
 			strconv.FormatBool(swatch.Tricoat),
 			swatch.Handle,
 		}
+
 	}
+
+	headerRow := []string{
+		"Make",
+		"Model",
+		"Year",
+		"MMY",
+		"Color name",
+		"Color code",
+		"Variant Metafield: variants.color [color]",
+		"Tricoat",
+		"Handle",
+	}
+	tempRow := make([][]string, 1)
+
+	tempRow[0] = headerRow
+	csvRows = append(tempRow, csvRows...)
 
 	err = writer.WriteAll(csvRows) // calls Flush internally
 
